@@ -1,6 +1,6 @@
 # Local Netlify folder
 /.netlify
 /node_modules
-/dist
+/dist/main.js
 # Local Netlify folder
 .netlify
