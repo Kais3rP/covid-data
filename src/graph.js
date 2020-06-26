@@ -1,4 +1,5 @@
 import {covidData} from './covid.js';
+import * as d3 from "d3";
 //Extraction of pil dataset of[year,pil] from json euro pil data.
 var covidDataSet = [];
 
