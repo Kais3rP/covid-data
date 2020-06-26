@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Kais3rP/covid-data/issues"
   },
-  "homepage": "https://github.com/Kais3rP/covid-data#readme"
+  "homepage": "https://github.com/Kais3rP/covid-data#readme",
+  "dependencies": {
+    "d3": "^5.16.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
 }
