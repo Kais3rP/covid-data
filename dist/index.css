@@ -13,6 +13,9 @@ body {
     align-items:center;
   }
 
+  .graph {
+    position:relative;
+  }
 
   .graphic {
 

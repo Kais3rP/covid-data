@@ -11,7 +11,7 @@ covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
 const w = 500;
 const h = 500;
 const padding = 30;
-const colWidth = (w-2*padding)/(covidDataSet.length);
+const colWidth = Math.floor(w-2*padding)/(covidDataSet.length);
 
 
 const xScale = d3.scaleLinear()
@@ -30,12 +30,12 @@ const yScaleAxis = d3.scaleLinear()
                 
 
 
-var toolTip = d3.select("body")
+var toolTip = d3.select(".graph")
                 .append("div")
                 .attr("class","tooltip")
                 .style("display","none")
 
-var svg = d3.select("body")
+var svg = d3.select('.graph')
             .append("svg")
             .attr("class","graphic")
             .attr("height", h - padding)
@@ -55,7 +55,7 @@ var svg = d3.select("body")
                    d3.select(this).attr("fill","rgb(49, 49, 49)");
                    toolTip.transition().duration(200).style("display","inline");
                    toolTip.text(()=>`${d[0]}: ${d[1]} deaths`)
-                          .style("top",`${h+80}px`)
+                          .style("top",`${h/2}px`)
                           .style("left",`${i*colWidth}px`)
                   })
                .on('mouseout', function(){ 
