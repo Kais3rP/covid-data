@@ -5,9 +5,9 @@ var covidDataSet = [];
 for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep,el.deaths,parseInt(el.month)]):null;
  
 covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
-console.log(covidDataSet[0])
 
-const w = 1000;
+
+const w = 500;
 const h = 500;
 const padding = 30;
 const colWidth = (w-2*padding)/(covidDataSet.length);
@@ -27,8 +27,14 @@ const yScaleAxis = d3.scaleLinear()
                  .range([h-3*padding,0])
                 
                 
-var container = document.getElementById("container");
-var svg = d3.select(container)
+
+
+var toolTip = d3.select("body")
+                .append("div")
+                .attr("class","tooltip")
+                .style("display","none")
+
+var svg = d3.select("body")
             .append("svg")
             .attr("class","graphic")
             .attr("height", h - padding)
@@ -42,13 +48,20 @@ var svg = d3.select(container)
                .attr("height",(d)=>d[1]>0 ? yScale(d[1]) : 1)
                .attr("x", (d,i)=> 2*padding+i*colWidth)
                .attr("y", (d,i)=> h - yScale(d[1]) - 2*padding)
-               .attr("fill", "blue")
-              
+               .attr("fill", "rgb(173, 173, 173)")
+               .on('mouseover', function(d,i){
+                  
+                   d3.select(this).attr("fill","rgb(49, 49, 49)");
+                   toolTip.transition().duration(200).style("display","inline");
+                   toolTip.text(()=>`${d[0]}: ${d[1]} deaths`)
+                          .style("top",`${h+80}px`)
+                          .style("left",`${i*colWidth}px`)
+                  })
+               .on('mouseout', function(){ 
+                  d3.select(this).attr("fill","rgb(173, 173, 173)");
+                  toolTip.transition().duration(200).style("display","none");
+            })
            
-              
-               svg.selectAll("text")
-                  .data(covidDataSet)
-                  .enter()
                   
 
                const xAxis = d3.axisBottom(xScale)
@@ -62,29 +75,22 @@ var svg = d3.select(container)
                svg.append("g")
                   .attr("transform", "translate(0,"+(h-2*padding)+ ")")
                   .call(xAxis);
-
-                  svg.append('text')
+ svg.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -h/2)
     .attr('y', 90)
-    .text('Deaths of Covid - 19');
+    .text('Deaths of Covid - 19')
+    .attr('class', 'axes-text');
 
-    svg.append('text')
+ svg.append('text')
     .attr('x', 70)
     .attr('y', h- 70)
     .text('Month')
-    .attr('class', 'info');
+    .attr('class', 'axes-text');
   
-  svg.append('text')
+ svg.append('text')
     .attr('x', padding*2)
     .attr('y', h-padding)
-    .text('More Information: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
+    .text('Data: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
     .attr('class', 'info');
 
-    var line = d3.line()
-    .x(function(d) { return x(d[0]); })
-    .y(function(d) { return y(d[2]); });
-
-    svg.append(line)
-       .attr('x', padding*3)
-       .attr('y', h-200)

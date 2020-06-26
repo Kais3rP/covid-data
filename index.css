@@ -13,22 +13,32 @@ body {
     align-items:center;
   }
 
-  .container{
-
-    min-width: 600px;
-    min-height: 500px;
-    background: white;
-    display:flex;
-    justify-content: center;
-    align-items:center;
-  }
 
   .graphic {
 
-background: pink;
-
+background: rgb(211, 211, 211);
+padding:20px;
+border:2px groove rgb(99, 99, 99);
+box-shadow:10px 10px 10px 5px rgb(54, 54, 54);
   }
 
-  .title:hover{
-      background: rgb(8, 235, 235);
-  }
+
+
+ .tooltip{
+   position:absolute;
+   width:100px;
+   height:50px;
+   overflow:auto;
+  background:rgb(49, 49, 49);
+  color:rgb(173, 173, 173);
+  cursor:default;
+  user-select: none;
+ }
+
+ .info{
+   font-size: 10px;
+ }
+
+ .axes.text{
+  font-size: 16px;
+ }
