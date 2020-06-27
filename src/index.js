@@ -12,15 +12,15 @@ async function covidGraph (){
    covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
    console.log(covidDataSet)
 
-const w = 500;
+const w = 800;
 const h = 500;
 const padding = 30;
-const colWidth = Math.floor(w-2*padding)/(covidDataSet.length);
+const colWidth = Math.floor(w-5*padding)/(covidDataSet.length);
 
 
 const xScale = d3.scaleLinear()
                  .domain([d3.min(covidDataSet, (d)=>d[2]),d3.max(covidDataSet, (d)=>d[2])])
-                 .range([2*padding, w-padding])
+                 .range([2*padding, w-6*padding])
                  
                 
 const yScale = d3.scaleLinear()
@@ -43,7 +43,7 @@ var svg = d3.select('.graph')
             .append("svg")
             .attr("class","graphic")
             .attr("height", h - padding)
-            .attr("width", w)
+            .attr("width", w-2*padding)
 
             svg.selectAll("rect")
                .data(covidDataSet)
