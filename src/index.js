@@ -3,7 +3,7 @@ import * as d3 from "d3";
 async function covidGraph (){
    var covidData = [];
    var covidDataSet = [];
-   await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/')
+   await fetch('https://cors-anywhere.herokuapp.com/opendata.ecdc.europa.eu/covid19/casedistribution/json/')
    .then(res=>res.json().then((res2)=> covidData = res2.records))
    
    console.log(covidData)
@@ -11,7 +11,7 @@ async function covidGraph (){
     
    covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
    console.log(covidDataSet)
-   
+
 const w = 500;
 const h = 500;
 const padding = 30;
