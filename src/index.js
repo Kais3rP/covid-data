@@ -1,13 +1,17 @@
-import {covidData} from './covid.js';
 import * as d3 from "d3";
-//Extraction of pil dataset of[year,pil] from json euro pil data.
-var covidDataSet = [];
 
-for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep,el.deaths,parseInt(el.month)]):null;
- 
-covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
-
-
+async function covidGraph (){
+   var covidData = [];
+   var covidDataSet = [];
+   await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/')
+   .then(res=>res.json().then((res2)=> covidData = res2.records))
+   
+   console.log(covidData)
+   for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep,el.deaths,parseInt(el.month)]):null;
+    
+   covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
+   console.log(covidDataSet)
+   
 const w = 500;
 const h = 500;
 const padding = 30;
@@ -95,3 +99,6 @@ var svg = d3.select('.graph')
     .text('Data: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
     .attr('class', 'info');
 
+   }
+//Call the graph builder
+   covidGraph()
