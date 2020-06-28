@@ -4,7 +4,8 @@ async function covidGraph (){
    var covidData = [];
    var covidDataSet = [];
    await fetch('https://cors-anywhere.herokuapp.com/opendata.ecdc.europa.eu/covid19/casedistribution/json/')
-   .then(res=>res.json().then((res2)=> covidData = res2.records))
+   .then(res=>res.json())
+   .then(data=> covidData = data.records)
    
    console.log(covidData)
    for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep,el.deaths,parseInt(el.month)]):null;
