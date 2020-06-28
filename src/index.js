@@ -3,7 +3,8 @@ import * as d3 from "d3";
 async function covidGraph (){
    var covidData = [];
    var covidDataSet = [];
-   await fetch('https://cors-anywhere.herokuapp.com/opendata.ecdc.europa.eu/covid19/casedistribution/json/')
+
+await fetch('https://cors-anywhere.herokuapp.com/opendata.ecdc.europa.eu/covid19/casedistribution/json/')
    .then(res=>res.json())
    .then(data=> covidData = data.records)
    
@@ -100,6 +101,8 @@ var svg = d3.select('.graph')
     .text('Data: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
     .attr('class', 'info');
 
+    document.getElementsByClassName('loader')[0].style = "display: none"
    }
 //Call the graph builder
    covidGraph()
+   
