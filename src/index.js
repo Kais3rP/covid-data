@@ -100,7 +100,7 @@ var svg = d3.select('.graph')
     .attr('y', h-padding)
     .text('Data: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
     .attr('class', 'info');
-
+    document.getElementsByClassName('title')[0].style = "display: block"
     document.getElementsByClassName('loader')[0].style = "display: none"
    }
 //Call the graph builder
