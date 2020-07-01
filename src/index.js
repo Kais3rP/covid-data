@@ -22,7 +22,7 @@ const colWidth = Math.floor(w-5*padding)/(covidDataSet.length);
 
 const xScale = d3.scaleLinear()
                  .domain([d3.min(covidDataSet, (d)=>d[2]),d3.max(covidDataSet, (d)=>d[2])])
-                 .range([2*padding, w-6*padding-10])
+                 .range([2*padding, w-3*padding])
                  
                 
 const yScale = d3.scaleLinear()
