@@ -4,7 +4,7 @@ async function covidGraph (){
    var covidData = [];
    var covidDataSet = [];
 
-await fetch('https://cors-anywhere.herokuapp.com/opendata.ecdc.europa.eu/covid19/casedistribution/json/')
+await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/')
    .then(res=>res.json())
    .then(data=> covidData = data.records)
    
