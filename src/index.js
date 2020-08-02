@@ -4,15 +4,15 @@ async function covidGraph (){
    var covidData = [];
    var covidDataSet = [];
 
-await fetch('https://opendata.ecdc.europa.eu/covid19/casedistribution/json/')
+await fetch('https://cors-anywhere.herokuapp.com/https://opendata.ecdc.europa.eu/covid19/casedistribution/json/', {headers : { 'Accept':'application/json'} })
    .then(res=>res.json())
-   .then(data=> covidData = data.records)
+   .then(data=> { covidData = data.records  })
    
-   console.log(covidData)
+  
    for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep,el.deaths,parseInt(el.month)]):null;
     
    covidDataSet = covidDataSet.reverse().filter(x=>x[2]!==12)
-   console.log(covidDataSet)
+   
 
 const w = 800;
 const h = 500;
@@ -105,4 +105,6 @@ var svg = d3.select('.graph')
    }
 //Call the graph builder
    covidGraph()
+   
+
    
