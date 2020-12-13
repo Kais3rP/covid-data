@@ -14,29 +14,29 @@ async function covidGraph() {
 
       for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep, el.deaths, parseInt(el.month)]) : null;
       covidDataSet = covidDataSet.reverse()
-      const color = "#3C403D"
-      const hoverColor = "#FF3B3F"
+      const color = "#FF3B3F"
+      const hoverColor = "#3C403D"
 
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
       const padding = 30;
-      const w = windowWidth ;
-      const h = windowHeight ;
+      const w = windowWidth;
+      const h = windowHeight;
 
       const colWidth = Math.floor(w - 5 * padding) / (covidDataSet.length);
 
-//Reset all body content before a redraw
-document.querySelector(".graph").innerHTML = ""
+      //Reset all body content before a redraw
+      document.querySelector(".graph").innerHTML = ""
 
-      const xScale = d3.scaleLinear()
+      const xScaleAxis = d3.scaleLinear()
          .domain([d3.min(covidDataSet, (d) => d[2]), d3.max(covidDataSet, (d) => d[2])])
-         .range([ padding, w - padding])
+         .range([padding, w - padding])
 
-      console.log(d3.max(covidDataSet, (d) => d[1]));
+
       const yScale = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
          .range([0, h - 3 * padding])
-console.log(w,h)
+
       const yScaleAxis = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
          .range([h - 3 * padding, 0])
@@ -77,7 +77,7 @@ console.log(w,h)
             toolTip.transition().duration(200).style("display", "none");
          })
 
-      const xAxis = d3.axisBottom(xScale)
+      const xAxis = d3.axisBottom(xScaleAxis)
          .ticks(6)
       const yAxis = d3.axisLeft(yScaleAxis);
 
@@ -119,6 +119,6 @@ window.onresize = () => {
    clearTimeout(redrawTimeout);
  redrawTimeout = setTimeout(()=> {
    covidGraph().then(ok => console.log("resizing window, refetching and redrawing graph")).catch(e => { console.log(e); document.body.innerText = "Something went wrong :-(" })
-  },2000) 
+  },2000)
 }
 */
