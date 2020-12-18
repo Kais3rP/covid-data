@@ -11,8 +11,9 @@ async function covidGraph() {
       document.getElementsByClassName('title')[0].style = "display: block"
       document.getElementsByClassName('loader')[0].style = "display: none"
 
+      console.log(covidData)
 
-      for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep, el.deaths, parseInt(el.month)]) : null;
+      for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep, el.deaths_weekly, Math.ceil(parseInt(/\d+$/.exec(el.year_week)[0])/4)]) : null;
       covidDataSet = covidDataSet.reverse()
       const color = "#FF3B3F"
       const hoverColor = "#3C403D"
@@ -27,21 +28,20 @@ async function covidGraph() {
 
       //Reset all body content before a redraw
       document.querySelector(".graph").innerHTML = ""
+console.log(covidDataSet)
 
       const xScaleAxis = d3.scaleLinear()
          .domain([d3.min(covidDataSet, (d) => d[2]), d3.max(covidDataSet, (d) => d[2])])
          .range([padding, w - padding])
 
-
       const yScale = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
          .range([0, h - 3 * padding])
+         console.log(yScale)
 
       const yScaleAxis = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
          .range([h - 3 * padding, 0])
-
-
 
       const toolTip = d3.select(".graph")
          .append("div")
@@ -106,6 +106,7 @@ async function covidGraph() {
          .attr('y', h - padding)
          .text('Data: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data')
          .attr('class', 'info');
+         return "Covid data ready"
    } catch (e) {
       throw new Error(e)
    }
