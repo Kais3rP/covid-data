@@ -11,8 +11,6 @@ async function covidGraph() {
       document.getElementsByClassName('title')[0].style = "display: block"
       document.getElementsByClassName('loader')[0].style = "display: none"
 
-      console.log(covidData)
-
       for (let el of covidData) el.countryterritoryCode === "ITA" ? covidDataSet.push([el.dateRep, el.deaths_weekly, Math.ceil(parseInt(/\d+$/.exec(el.year_week)[0])/4)]) : null;
       covidDataSet = covidDataSet.reverse()
       const color = "#FF3B3F"
@@ -28,7 +26,6 @@ async function covidGraph() {
 
       //Reset all body content before a redraw
       document.querySelector(".graph").innerHTML = ""
-console.log(covidDataSet)
 
       const xScaleAxis = d3.scaleLinear()
          .domain([d3.min(covidDataSet, (d) => d[2]), d3.max(covidDataSet, (d) => d[2])])
@@ -37,7 +34,7 @@ console.log(covidDataSet)
       const yScale = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
          .range([0, h - 3 * padding])
-         console.log(yScale)
+        
 
       const yScaleAxis = d3.scaleLinear()
          .domain([0, d3.max(covidDataSet, (d) => d[1])])
